@@ -51,6 +51,15 @@ $(document).ready(function() {
     $("#order-total").text(currentOrder.total);
   });
 
+  $("#btn-submit-order").click(function() {
+    $("#review-screen").addClass("hide");
+    $("#order-confirmation").removeClass("hide");
+  });
+
+  $("#btn-home").click(function() {
+    location.reload(true);
+  })
+
 
 });
 

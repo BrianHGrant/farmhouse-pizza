@@ -49,3 +49,11 @@ body  {
   font-family: 'Londrina Solid', cursive;
   padding-left: 0.5em;
 }
+
+#order-confirmation {
+  background:rgba(133,205,208,0.5);
+  border: 2px ridge #358B8F;
+  font-family: 'Londrina Solid', cursive;
+  padding-left: 0.5em;
+
+}
