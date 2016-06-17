@@ -27,10 +27,10 @@ $(document).ready(function() {
       selectedToppings.push($(this).val());
     });
 
-    orderPerson = new Person(personName, personEmail);
-    orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust, selectedToppings);
-    orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
-    currentOrder = new Order(orderPerson, orderPizza, orderExtras);
+    var orderPerson = new Person(personName, personEmail);
+    var orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust, selectedToppings);
+    var orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
+    var currentOrder = new Order(orderPerson, orderPizza, orderExtras);
 
     orderPizza.calculatePrice();
     orderExtras.calculatePrice();
