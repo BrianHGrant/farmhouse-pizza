@@ -12,7 +12,8 @@ $(document).ready(function() {
       $("#btn-form").addClass("hide");
     }
   });
-  $("#btn-review").click(function() {
+  $("#btn-review").click(function(event) {
+    event.preventDefault();
     var personName = $("input#person-name").val();
     var personEmail = $("input#person-email").val();
     var pizzaSize = $("#size-selector").val();
@@ -21,15 +22,15 @@ $(document).ready(function() {
     var extrasDrink = $("#drink-selector").val();
     var extrasSalad = $("#salad-selector").val();
     var extrasSide = $("#side-selector").val();
-
-    var orderPerson = new Person(personName, personEmail);
-    var orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust);
-    var orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
-    var currentOrder = new Order(orderPerson, orderPizza, orderExtras);
-
+    var selectedToppings = [];
     $("#topping-selector").each(function() {
-      orderPizza.toppings.push($(this).val());
+      selectedToppings.push($(this).val());
     });
+
+    orderPerson = new Person(personName, personEmail);
+    orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust, selectedToppings);
+    orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
+    currentOrder = new Order(orderPerson, orderPizza, orderExtras);
 
     orderPizza.calculatePrice();
     orderExtras.calculatePrice();
@@ -49,18 +50,16 @@ $(document).ready(function() {
     $("#pizza-price").text(currentOrder.pizzas.price);
     $("#extras-price").text(currentOrder.extras.price);
     $("#order-total").text(currentOrder.total);
+
+    $("#btn-submit-order").click(function() {
+      $("#review-screen").addClass("hide");
+      $("#order-confirmation").removeClass("hide");
+    });
+
+    $("#btn-home").click(function() {
+      location.reload(true);
+    })
   });
-
-  $("#btn-submit-order").click(function() {
-    $("#review-screen").addClass("hide");
-    $("#order-confirmation").removeClass("hide");
-  });
-
-  $("#btn-home").click(function() {
-    location.reload(true);
-  })
-
-
 });
 
 
@@ -76,11 +75,11 @@ function Person(name, email) {
 }
 
 //pizza constructor
-function Pizza(size, cheese, crust) {
+function Pizza(size, cheese, crust, toppings) {
   this.size = size;
   this.cheese = cheese;
   this.crust = crust;
-  this.toppings = [];
+  this.toppings = toppings;
   this.price = 12;
 }
 
@@ -105,7 +104,7 @@ function Order(person, pizza, extras) {
 
 // Calculate Pizza Price
 Pizza.prototype.calculatePrice = function() {
-  this.price += (this.toppings.length * 0.50);
+  this.price += (this.toppings[0].length * 0.50);
 
   if(this.size === "Medium") {
     this.price += 1.00;
