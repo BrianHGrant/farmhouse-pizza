@@ -17,22 +17,17 @@ body  {
   font-size: 5em;
 }
 
-#landing-image {
-  background-color: red;
-}
-
 #landing-image img {
   width: 200px;
   height: 200px;
 }
 
-#landing-text {
-  background-color: blue;
+.body-boxes {
+  background:rgba(190,229,153,0.5);
+  border: 2px ridge #003B1F;
 }
 
 #order-form {
-  background:rgba(190,229,153,0.5);
-  border: 2px ridge #003B1F;
   padding-left: 1em;
   padding-bottom: 1em;
 }
@@ -48,4 +43,9 @@ body  {
 
 #btn-review {
   margin-top: 1em;
+}
+
+#review-screen {
+  font-family: 'Londrina Solid', cursive;
+  padding-left: 0.5em;
 }

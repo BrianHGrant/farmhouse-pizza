@@ -34,8 +34,24 @@ $(document).ready(function() {
     orderPizza.calculatePrice();
     orderExtras.calculatePrice();
     currentOrder.calculateTotal();
-    alert(currentOrder.total);
+
+    $("#order-form").addClass("hide");
+    $("#review-screen").removeClass("hide");
+    $("#order-name").text(currentOrder.person.name);
+    $("#order-email").text(currentOrder.person.email);
+    $("#order-size").text(currentOrder.pizzas.size);
+    $("#order-crust").text(currentOrder.pizzas.crust);
+    $("#order-cheese").text(currentOrder.pizzas.cheese);
+    $("#order-toppings").text(currentOrder.pizzas.toppings);
+    $("#order-drinks").text(currentOrder.extras.drinks);
+    $("#order-salad").text(currentOrder.extras.salad);
+    $("#order-side").text(currentOrder.extras.side);
+    $("#pizza-price").text(currentOrder.pizzas.price);
+    $("#extras-price").text(currentOrder.extras.price);
+    $("#order-total").text(currentOrder.total);
   });
+
+
 });
 
 
@@ -64,6 +80,7 @@ function Extras(drinks, salad, side) {
   this.drinks = drinks;
   this.salad = salad;
   this.side = side;
+  this.price = 0;
 }
 
 //order constructor
@@ -113,6 +130,7 @@ Extras.prototype.calculatePrice = function() {
   if (this.side != "None") {
     this.price += 5.00;
   }
+  alert(this.price);
 }
 
 //Calculate Order total
