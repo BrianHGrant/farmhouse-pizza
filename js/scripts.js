@@ -27,29 +27,38 @@ $(document).ready(function() {
       selectedToppings.push($(this).val());
     });
 
-    var orderPerson = new Person(personName, personEmail);
-    var orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust, selectedToppings);
-    var orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
-    var currentOrder = new Order(orderPerson, orderPizza, orderExtras);
+    orderPerson = new Person(personName, personEmail);
+    orderPizza = new Pizza(pizzaSize, pizzaCheese, pizzaCrust, selectedToppings);
+    orderExtras = new Extras(extrasDrink, extrasSalad, extrasSide);
+    currentOrder = new Order(orderPerson, orderExtras);
 
     orderPizza.calculatePrice();
     orderExtras.calculatePrice();
+    currentOrder.addPizza(orderPizza);
     currentOrder.calculateTotal();
 
     $("#order-form").addClass("hide");
     $("#review-screen").removeClass("hide");
     $("#order-name").text(currentOrder.person.name);
     $("#order-email").text(currentOrder.person.email);
-    $("#order-size").text(currentOrder.pizzas.size);
-    $("#order-crust").text(currentOrder.pizzas.crust);
-    $("#order-cheese").text(currentOrder.pizzas.cheese);
-    $("#order-toppings").text(currentOrder.pizzas.toppings);
+
+    for(j=0;j<currentOrder.pizzas.length; j++) {
+      $("#pizza-number").text(j+1);
+      $("#order-size").text(currentOrder.pizzas[j].size);
+      $("#order-crust").text(currentOrder.pizzas[j].crust);
+      $("#order-cheese").text(currentOrder.pizzas[j].cheese);
+      $("#order-toppings").text(currentOrder.pizzas[j].toppings);
+    }
     $("#order-drinks").text(currentOrder.extras.drinks);
     $("#order-salad").text(currentOrder.extras.salad);
     $("#order-side").text(currentOrder.extras.side);
     $("#pizza-price").text(currentOrder.pizzas.price);
     $("#extras-price").text(currentOrder.extras.price);
     $("#order-total").text(currentOrder.total);
+
+    // $("#btn-add-pizza").click(function() {
+    //
+    // });
 
     $("#btn-submit-order").click(function() {
       $("#review-screen").addClass("hide");
@@ -92,9 +101,9 @@ function Extras(drinks, salad, side) {
 }
 
 //order constructor
-function Order(person, pizza, extras) {
+function Order(person, extras) {
   this.person = person;
-  this.pizzas = pizza;
+  this.pizzas = [];
   this.extras = extras;
   this.total = 0;
 }
@@ -141,7 +150,15 @@ Extras.prototype.calculatePrice = function() {
   alert(this.price);
 }
 
+//Add Pizza to Order
+Order.prototype.addPizza = function(orderPizza) {
+  this.pizzas.push(orderPizza);
+}
+
 //Calculate Order total
 Order.prototype.calculateTotal = function() {
-  this.total += this.pizzas.price + this.extras.price;
+  for(i=0;i<this.pizzas.length;i++) {
+    this.total += this.pizzas[i].price;
+  }
+  this.total+= this.extras.price;
 }
