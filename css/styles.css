@@ -17,14 +17,24 @@ body  {
   font-size: 5em;
 }
 
-#landing-image img {
-  width: 200px;
-  height: 200px;
-}
-
 .body-boxes {
+  padding: 1em;
+  margin: 0.2em;
   background:rgba(190,229,153,0.5);
   border: 2px ridge #003B1F;
+}
+
+#landing-text {
+  font-family: 'Londrina Solid', cursive;
+  background:rgba(133,205,208,0.5);
+  border: 2px ridge #358B8F;
+  font-size: 1.2em;
+}
+
+#tag-line {
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 #003B1F, 0 1px #003B1F, 1px 0 #003B1F, 0 -1px #003B1F;
 }
 
 #order-form {
