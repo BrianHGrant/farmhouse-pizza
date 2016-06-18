@@ -25,7 +25,7 @@ User can confirm order and return to home.
 
 ## Setup/Installation Requirements
 
-* _Open page in web browser: <a href="http://brianhgrant.github.io/farmhouse-pizza</a>_
+* _Open page in web browser: <a href="http://brianhgrant.github.io/farmhouse-pizza">_
 
 ## Known Bugs
 
