@@ -147,7 +147,6 @@ Extras.prototype.calculatePrice = function() {
   if (this.side != "None") {
     this.price += 5.00;
   }
-  alert(this.price);
 }
 
 //Add Pizza to Order
